@@ -9,6 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env: 
+      GITEA_SERVER: https://git.rehounou.ca
+      GITEA_TOKEN: ${{ secrets.REPO_GITEA_TOKEN }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
