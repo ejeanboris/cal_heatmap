@@ -28,7 +28,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/my-image:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/cal_heatmap:latest
 
   push_to_gitea:
     runs-on: ubuntu-latest
@@ -43,5 +43,5 @@ jobs:
           GITEA_SERVER: ${{ secrets.ADDRESS_GITEA_SERVER }}
           GITEA_TOKEN: ${{ secrets.REPO_GITEA_TOKEN }}
         run: |
-          docker tag ${{ secrets.DOCKER_USERNAME }}/my-image:latest ${GITEA_SERVER}/my-repo/my-image:latest
-          docker push ${GITEA_SERVER}/my-repo/my-image:latest
+          docker tag ${{ secrets.DOCKER_USERNAME }}/cal_heatmap:latest ${GITEA_SERVER}/my-repo/cal_heatmap:latest
+          docker push ${GITEA_SERVER}/my-repo/cal_heatmap:latest
