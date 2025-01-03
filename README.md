@@ -11,7 +11,7 @@ This project generates interactive yearly activity heatmaps using calendar data 
 ## Prerequisites
 
 - Python 3.9+
-- Required Python packages (listed in `requirements.txt`)
+- Required Python packages (listed in `requirements.txt`)!
 
 ## Installation
 
