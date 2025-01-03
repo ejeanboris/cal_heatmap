@@ -11,7 +11,7 @@ RUN pip install --no-cache-dir pip-chill
 COPY . /app
 
 # Generate requirements.txt with pip-chill
-RUN pip-chill > requirements.txt
+#RUN pip-chill > requirements.txt
 
 # Install the required packages based on the newly created requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
@@ -23,4 +23,4 @@ RUN mkdir /config
 EXPOSE 8501
 
 # Command to run the Streamlit app
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["python","-m","streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
