@@ -48,4 +48,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            itsmio/${{ secrets.REPO_USERNAME }}/cal_heatmap:latest
+            remi/cal_heatmap:latest
