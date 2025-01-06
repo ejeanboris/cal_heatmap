@@ -34,18 +34,15 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/cal_heatmap:latest
 
-  push_to_gitea:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Push to Gitea
-        env:
-          GITEA_SERVER: ${{ secrets.ADDRESS_GITEA_SERVER }}
-          GITEA_TOKEN: ${{ secrets.REPO_GITEA_TOKEN }}
+      - name: Log in to Gitea Docker Registry
         run: |
-          docker tag ${{ secrets.DOCKER_USERNAME }}/cal_heatmap:latest ${GITEA_SERVER}/my-repo/cal_heatmap:latest
-          docker push ${GITEA_SERVER}/my-repo/cal_heatmap:latest
+          echo ${{ secrets.REPO_GITEA_TOKEN }} | docker login ${{ env.GITEA_SERVER }} -u ${{ secrets.GITEA_USERNAME }} --password-stdin
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ env.GITEA_SERVER }}/{{ secrets.GITEA_USERNAME }}/cal_heatmap:latest
