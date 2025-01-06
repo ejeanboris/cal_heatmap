@@ -48,4 +48,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ env.GITEA_SERVER }}/${{ secrets.REPO_USERNAME }}/cal_heatmap:latest
+            itsmio/${{ secrets.REPO_USERNAME }}/cal_heatmap:latest
