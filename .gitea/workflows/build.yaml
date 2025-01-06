@@ -40,6 +40,10 @@ jobs:
         run: |
           echo ${{ secrets.REPO_GITEA_TOKEN }} | docker login ${{ env.GITEA_REGISTRY }} -u ${{ secrets.REPO_USERNAME }} --password-stdin
 
+      - name: Verify login
+        run: |
+          docker info
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
