@@ -28,21 +28,12 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
+      - name: Login to Gitea Container Registry
+        uses: docker/login-action@v3
         with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/cal_heatmap:latest
-
-      - name: Log in to Gitea Docker Registry
-        run: |
-          echo ${{ secrets.REPO_GITEA_TOKEN }} | docker login ${{ env.GITEA_REGISTRY }} -u ${{ secrets.REPO_USERNAME }} --password-stdin
-
-      - name: Verify login
-        run: |
-          docker info
+          registry: ${{ GITEA_REGISTRY }}
+          username: ${{ secrets.REPO_USERNAME }} 
+          password: ${{ secrets.REPO_GITEA_TOKEN }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
@@ -51,4 +42,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ env.GITEA_REGISTRY }}/${{ secrets.REPO_USERNAME }}/cal_heatmap:latest
+            ${{ secrets.DOCKER_USERNAME }}/cal_heatmap:latest
+            ${{ secrets.DOCKER_USERNAME }}/cal_heatmap:1.0.0
+            ${{ GITEA_REGISTRY }}/cal_heatmap:latest
+            ${{ GITEA_REGISTRY }}/cal_heatmap:1.0.0
